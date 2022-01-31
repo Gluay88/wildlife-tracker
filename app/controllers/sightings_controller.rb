@@ -6,13 +6,14 @@ class SightingsController < ApplicationController
     end
 
     def show
-        
-        sighting = Sighting.find(params[:id])
+        animal = Animal.find(params[:animal_id])
+        sighting = animal.sightings.find(params[:id])
         render json: sighting
     end
 
     def create 
-        sighting = Sighting.create(sighting_params)
+        animal = Animal.find(params[:animal_id])
+        sighting = animal.sightings.create(sighting_params)
         if sighting.valiid?
             render json: sighting
         else
@@ -21,7 +22,8 @@ class SightingsController < ApplicationController
     end
 
     def update
-        sighting = Sighting.find(params[:id])
+        animal = Animal.find(params[:animal_id])
+        sighting = animal.sightings.find(params[:id])
         sighting.update(sighting_params)
         if sighting.valid?
             render json: sighting
@@ -31,7 +33,8 @@ class SightingsController < ApplicationController
     end
 
     def destroy
-        sighting = Sighting.find(params[:id])
+        animal = Animal.fine(params[:animal_id])
+        sighting = animal.sightings.find(params[:id])
         if sighting.destroy
             render json: sighting
         else
