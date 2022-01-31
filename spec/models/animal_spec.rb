@@ -13,9 +13,17 @@ RSpec.describe Animal, type: :model do
         animal1 = Animal.create common_name: 'foxes' 
         animal2 = Animal.create common_name: 'foxes'
         p animal2.errors
-        expect(animal2.errors[:common_name]).to_not be_empty 
-       
+        expect(animal2.errors[:common_name]).to_not be_empty    
+    end
+
+    it 'latin_name should be unique' do
+        animal1 = Animal.create latin_name: 'red foxes' 
+        animal2 = Animal.create latin_name: 'red foxes'
+      
+        expect(animal2.errors[:latin_name]).to_not be_empty    
     end
 
 
 end
+
+# working on the test
